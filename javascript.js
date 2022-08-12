@@ -16,8 +16,10 @@ const newGame = (() => {
   const updateState = () => {
     for (let i = 1; i <= 10; i++) {
       var element = document.getElementById(i);
+      const tag = document.createElement("p");
       const text = document.createTextNode(gameState[i - 1]);
-      element.appendChild(text);
+      tag.appendChild(text);
+      element.appendChild(tag);
     }
   };
   return {
