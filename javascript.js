@@ -9,6 +9,7 @@ const newGame = (() => {
       var cell = document.createElement("div");
       // Give each cell the class boardCell and an id from 1-9
       cell.className = "boardCell";
+      cell.onclick = "newGame.reply_click(this.id)";
       cell.id = `${i}`;
       element.appendChild(cell);
     }
@@ -22,9 +23,13 @@ const newGame = (() => {
       element.appendChild(tag);
     }
   };
+  const reply_click = (clicked_id) => {
+    gameState[clicked_id] = "X";
+  };
   return {
     createBoard,
-    updateState
+    updateState,
+    reply_click
   };
 })();
 

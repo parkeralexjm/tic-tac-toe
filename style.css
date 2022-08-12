@@ -12,8 +12,13 @@
 }
 
 .boardCell {
+  display: flex;
   background-color: lightcyan;
   border: 2px solid black;
   width: 100px;
   height: 100px;
+}
+
+.boardCell > p {
+  margin: auto;
 }
