@@ -2,7 +2,7 @@
 
 const newGame = (() => {
   // Create an array to store the gamestate
-  var gameState = ["x", "x", "x", "x", "x", "x", "x", "x", "x"];
+  var gameState = ["", "", "", "", "", "", "", "", ""];
   var playerSymbol = "o";
   // Create a function that will create and display the board
   const createBoard = () => {
@@ -14,15 +14,19 @@ const newGame = (() => {
       // Give each cell the class boardCell and an id from 1-9
       cell.className = "boardCell";
       cell.id = `${i}`;
-      cell.addEventListener('click', function() {
+      // Add an event listener to each cell to add the player's symbol on click
+      // then remove the listener
+      cell.addEventListener('click', function AddSymbol() {
         if (playerSymbol == "x") {
           console.log(`cell ${i} is now x`)
           gameState[i - 1] = "x";
-          newGame.updateState()
+          this.removeEventListener('click', AddSymbol);
+          newGame.updateState();
         } else { 
           console.log(`cell ${i} is now o`);
           gameState[i - 1] = "o";
-          newGame.updateState()
+          this.removeEventListener('click', AddSymbol);
+          newGame.updateState();
         }
       });
       element.appendChild(cell);
