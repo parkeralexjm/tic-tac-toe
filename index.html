@@ -13,8 +13,9 @@
       <span>Tic-Tac-Toe</span>
       <div id="boardContainer"></div>
       <div class="playerSelect">
-        <input type="text" placeholder="name" />
-        <button type="submit">Submit</button>
+        <span>Choose your game symbol</span>
+        <button type="submit" id="x" value="x" onclick="gameAdmin.createBoard('x')">X</button>
+        <button type="submit" id="o" value="o" onclick="gameAdmin.createBoard('o')">O</button>
       </div>
     </div>
   </body>
