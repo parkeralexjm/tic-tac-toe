@@ -1,2 +1,3 @@
 # tic-tac-toe
-Program to play tic-tac-toe against an AI
+This is a simple tic tac toe game that can be played
+locally with another player.

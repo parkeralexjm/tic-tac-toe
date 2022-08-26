@@ -17,9 +17,9 @@ const gameAdmin = (() => {
     var win = document.createElement("span");
     win.className = "boardCongratulations";
     if (symbol == 'x'){
-      win.innerHTML = 'Congratulations,<i class="fa-solid fa-xmark"></i> is the winner!';
+      win.innerHTML = 'Congratulations, X is the winner!';
     } else if (symbol == 'o'){
-      win.innerHTML = 'Congratulations,<i class="fa-solid fa-circle"></i> is the winner!';
+      win.innerHTML = 'Congratulations, X is the winner!';
     }
     element.appendChild(win);
   }
@@ -37,9 +37,9 @@ const gameAdmin = (() => {
   const updateIndicator = () => {
   var player = document.getElementById("currentPlayer")
     if (playerSymbol == "x") {
-      player.innerHTML = "It is <i class='fa-solid fa-xmark'></i> turn";
+      player.innerHTML = "It is X's turn";
     } else if (playerSymbol == "o") {
-      player.innerHTML = "It is <i class='fa-solid fa-circle'></i> turn";
+      player.innerHTML = "It is O's turn";
     }
   };
 
@@ -54,7 +54,7 @@ const gameAdmin = (() => {
     // Create 9 cells for the game board inside the boardContainer div
     for (let i = 1; i <= 9; i++) {
       var cell = document.createElement("div");
-      var iTag = document.createElement("i");
+      var pTag = document.createElement("p");
       // Give each cell the class boardCell and an id from 1-9
       cell.className = "boardCell";
       cell.id = `${i}`;
@@ -74,7 +74,7 @@ const gameAdmin = (() => {
         }
       }, {once: true});
       element.appendChild(cell);
-      cell.appendChild(iTag);
+      cell.appendChild(pTag);
       updateIndicator();
     }
   };
@@ -85,9 +85,9 @@ const gameAdmin = (() => {
       var element = document.getElementById(i).firstChild;
       // Display icons for the array symbols
       if (gameState[i - 1] == "x") {
-        element.className = "fa-solid fa-xmark fa-5x"
+        element.innerHTML = "X";
       } else if (gameState[i - 1] == "o") {
-        element.className = "fa-solid fa-circle fa-4x"
+        element.innerHTML = "O";
       }
     }
 

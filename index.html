@@ -1,26 +1,37 @@
 <!DOCTYPE html>
+
 <html lang="en">
+  
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
     <script src="javascript.js" defer></script>
-    <script src="https://kit.fontawesome.com/60b6215b6a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
-    <div class="gameContainer">
+    <div class="titleContainer">
       <span>Tic-Tac-Toe</span>
+    </div>
+    <div class="playerSelect">
+      <span>To start a new game, choose your game symbol:</span>
+      <button type="submit" id="x" value="x" onclick="gameAdmin.createBoard('x')">x</button>
+      <button type="submit" id="o" value="o" onclick="gameAdmin.createBoard('o')">o</button>
+    </div>
+    <div class="gameContainer">
       <div id="boardContainer"></div>
       <div class="playerIndicator">
         <span id="currentPlayer"></span>
       </div>
-      <div class="playerSelect">
-        <span>To start a new game, choose your game symbol:</span>
-        <button type="submit" id="x" value="x" onclick="gameAdmin.createBoard('x')"><i class="fa-solid fa-xmark fa-lg"></i></i></button>
-        <button type="submit" id="o" value="o" onclick="gameAdmin.createBoard('o')"><i class="fa-solid fa-circle fa-lg"></i></button>
-      </div>
     </div>
+    <footer>
+      <p>Copyright © 2022 parkeralexjm</p>
+    </footer>
   </body>
 </html>
