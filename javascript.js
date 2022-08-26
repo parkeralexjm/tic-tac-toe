@@ -16,9 +16,14 @@ const gameAdmin = (() => {
   const winningDisplay = (symbol) => {
     var win = document.createElement("span");
     win.className = "boardCongratulations";
-    win.innerHTML = `Congratulations, ${symbol} is the winner!`;
+    if (symbol == 'x'){
+      win.innerHTML = 'Congratulations,<i class="fa-solid fa-xmark"></i> is the winner!';
+    } else if (symbol == 'o'){
+      win.innerHTML = 'Congratulations,<i class="fa-solid fa-circle"></i> is the winner!';
+    }
     element.appendChild(win);
   }
+
   // Function that will display a draw message
   const drawDisplay = () => {
     var draw = document.createElement("span");
@@ -26,6 +31,18 @@ const gameAdmin = (() => {
     draw.innerHTML = "Too bad, nobody is a winner here!";
     element.appendChild(draw);
   }
+
+  // Function that updates the turn indicator
+  // Update the player indicator
+  const updateIndicator = () => {
+  var player = document.getElementById("currentPlayer")
+    if (playerSymbol == "x") {
+      player.innerHTML = "It is <i class='fa-solid fa-xmark'></i> turn";
+    } else if (playerSymbol == "o") {
+      player.innerHTML = "It is <i class='fa-solid fa-circle'></i> turn";
+    }
+  };
+
   // Function that will create and display the board
   const createBoard = (playerSelection) => {
     // Set default playerSelection
@@ -33,10 +50,11 @@ const gameAdmin = (() => {
     // Clear any previous content from the game board and reset
     clearBoard();
     playerSymbol = playerSelection;
+    //gameAdmin.updateState();
     // Create 9 cells for the game board inside the boardContainer div
     for (let i = 1; i <= 9; i++) {
       var cell = document.createElement("div");
-      var pTag = document.createElement("p");
+      var iTag = document.createElement("i");
       // Give each cell the class boardCell and an id from 1-9
       cell.className = "boardCell";
       cell.id = `${i}`;
@@ -45,22 +63,19 @@ const gameAdmin = (() => {
       cell.addEventListener('click', function AddSymbol() {
         if (gameState[i - 1] == ""){
           if (playerSymbol == "x") {
-            console.log(`cell ${i} is now x`)
             gameState[i - 1] = "x";
-            this.removeEventListener('click', AddSymbol);
             playerSymbol = "o";
             gameAdmin.updateState();
           } else { 
-            console.log(`cell ${i} is now o`);
             gameState[i - 1] = "o";
-            this.removeEventListener('click', AddSymbol);
             playerSymbol = "x";
             gameAdmin.updateState();
           }
         }
-      });
+      }, {once: true});
       element.appendChild(cell);
-      cell.appendChild(pTag);
+      cell.appendChild(iTag);
+      updateIndicator();
     }
   };
   const updateState = () => {
@@ -68,8 +83,15 @@ const gameAdmin = (() => {
       // For numbers 1-9 get the element, add a p tag and update it with the character
       // stored in the gameState array that matches the id
       var element = document.getElementById(i).firstChild;
-      element.innerText = gameState[i - 1];
+      // Display icons for the array symbols
+      if (gameState[i - 1] == "x") {
+        element.className = "fa-solid fa-xmark fa-5x"
+      } else if (gameState[i - 1] == "o") {
+        element.className = "fa-solid fa-circle fa-4x"
+      }
     }
+
+    updateIndicator();
     // Check if there is a winning game state by comparing the row, column or diagonal
     // --Could be improved--
        // Row 1 
@@ -119,9 +141,10 @@ const gameAdmin = (() => {
     updateState,
     clearBoard,
     winningDisplay,
-    drawDisplay
+    drawDisplay,
+    updateIndicator,
   };
 })();
 
-gameAdmin.createBoard();
+//gameAdmin.createBoard();
 //newGame.updateState();
