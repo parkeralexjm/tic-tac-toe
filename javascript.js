@@ -1,17 +1,37 @@
-
-
 const gameAdmin = (() => {
-  // Create an array to store the gamestate
+  // Initialise the gamestate
   var gameState = ["", "", "", "", "", "", "", "", ""];
+  // Initialise the symbol the player will use
   var playerSymbol = "x";
-  // Create a function that will create and display the board
+  // Global selection for element that contains the board
+  var element = document.getElementById("boardContainer");
+  
+  // Function that will clear the board
+  const clearBoard = () => {
+    element.innerHTML = "";
+    gameState = ["", "", "", "", "", "", "", "", ""];
+  }
+  
+  // Function that will display a winning message
+  const winningDisplay = (symbol) => {
+    var win = document.createElement("span");
+    win.className = "boardCongratulations";
+    win.innerHTML = `Congratulations, ${symbol} is the winner!`;
+    element.appendChild(win);
+  }
+  // Function that will display a draw message
+  const drawDisplay = () => {
+    var draw = document.createElement("span");
+    draw.className = "boardCongratulations";
+    draw.innerHTML = "Too bad, nobody is a winner here!";
+    element.appendChild(draw);
+  }
+  // Function that will create and display the board
   const createBoard = (playerSelection) => {
     // Set default playerSelection
     playerSelection = (typeof playerSelection !== 'undefined') ? playerSelection : "x";
     // Clear any previous content from the game board and reset
-    var element = document.getElementById("boardContainer");
-    element.innerHTML = "";
-    gameState = ["", "", "", "", "", "", "", "", ""];
+    clearBoard();
     playerSymbol = playerSelection;
     // Create 9 cells for the game board inside the boardContainer div
     for (let i = 1; i <= 9; i++) {
@@ -50,10 +70,56 @@ const gameAdmin = (() => {
       var element = document.getElementById(i).firstChild;
       element.innerText = gameState[i - 1];
     }
+    // Check if there is a winning game state by comparing the row, column or diagonal
+    // --Could be improved--
+       // Row 1 
+    if ((gameState[0] == 'x' && gameState[1] == 'x' && gameState[2] == 'x') || 
+       // Row 2 
+        (gameState[3] == 'x' && gameState[4] == 'x' && gameState[5] == 'x') ||
+       // Row 3   
+        (gameState[6] == 'x' && gameState[7] == 'x' && gameState[8] == 'x') ||
+       // Column 1 
+        (gameState[0] == 'x' && gameState[3] == 'x' && gameState[6] == 'x') ||
+       // Column 2 
+        (gameState[1] == 'x' && gameState[4] == 'x' && gameState[7] == 'x') ||
+       // Column 3
+        (gameState[2] == 'x' && gameState[5] == 'x' && gameState[8] == 'x') ||
+       // Diagonal 1
+        (gameState[0] == 'x' && gameState[4] == 'x' && gameState[8] == 'x') ||
+       // Diagonal 2
+        (gameState[2] == 'x' && gameState[4] == 'x' && gameState[6] == 'x')) {
+          // There is a winning row x clear the state and display a winning message
+          //clearBoard();
+          winningDisplay('x');
+
+        } else if ((gameState[0] == 'o' && gameState[1] == 'o' && gameState[2] == 'o') || 
+        // Row 2 
+         (gameState[3] == 'o' && gameState[4] == 'o' && gameState[5] == 'o') ||
+        // Row 3   
+         (gameState[6] == 'o' && gameState[7] == 'o' && gameState[8] == 'o') ||
+        // Column 1 
+         (gameState[0] == 'o' && gameState[3] == 'o' && gameState[6] == 'o') ||
+        // Column 2 
+         (gameState[1] == 'o' && gameState[4] == 'o' && gameState[7] == 'o') ||
+        // Column 3
+         (gameState[2] == 'o' && gameState[5] == 'o' && gameState[8] == 'o') ||
+        // Diagonal 1
+         (gameState[0] == 'o' && gameState[4] == 'o' && gameState[8] == 'o') ||
+        // Diagonal 2
+         (gameState[2] == 'o' && gameState[4] == 'o' && gameState[6] == 'o')) {
+          // There is a winning row x clear the state and display a winning message
+          //clearBoard();
+          winningDisplay('o');
+         } else if (gameState.includes("") == false) {
+          drawDisplay();
+         }
   };
   return {
     createBoard,
-    updateState
+    updateState,
+    clearBoard,
+    winningDisplay,
+    drawDisplay
   };
 })();
 
