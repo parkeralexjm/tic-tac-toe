@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
   
   <head>
@@ -9,27 +8,28 @@
     <link rel="stylesheet" href="style.css" />
     <script src="javascript.js" defer></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap" rel="stylesheet"/>
     <title>Tic-Tac-Toe</title>
   </head>
+
   <body>
     <div class="titleContainer">
       <span>Tic-Tac-Toe</span>
     </div>
+    
     <div class="playerSelect">
       <span>To start a new game, choose your game symbol:</span>
       <button type="submit" id="x" value="x" onclick="gameAdmin.createBoard('x')">x</button>
       <button type="submit" id="o" value="o" onclick="gameAdmin.createBoard('o')">o</button>
     </div>
+
     <div class="gameContainer">
       <div id="boardContainer"></div>
       <div class="playerIndicator">
         <span id="currentPlayer"></span>
       </div>
     </div>
+
     <footer>
       <p>Copyright © 2022 parkeralexjm</p>
     </footer>

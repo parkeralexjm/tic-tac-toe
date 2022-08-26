@@ -1,14 +1,16 @@
+"use strict";
+
 const gameAdmin = (() => {
   // Initialise the gamestate
   var gameState = ["", "", "", "", "", "", "", "", ""];
   // Initialise the symbol the player will use
   var playerSymbol = "x";
-  // Global selection for element that contains the board
-  var element = document.getElementById("boardContainer");
+  // Global selection for boardContainer that contains the board
+  var boardContainer = document.getElementById("boardContainer");
   
   // Function that will clear the board
   const clearBoard = () => {
-    element.innerHTML = "";
+    boardContainer.innerHTML = "";
     gameState = ["", "", "", "", "", "", "", "", ""];
   }
   
@@ -21,7 +23,7 @@ const gameAdmin = (() => {
     } else if (symbol == 'o'){
       win.innerHTML = 'Congratulations, X is the winner!';
     }
-    element.appendChild(win);
+    boardContainer.appendChild(win);
   }
 
   // Function that will display a draw message
@@ -29,7 +31,7 @@ const gameAdmin = (() => {
     var draw = document.createElement("span");
     draw.className = "boardCongratulations";
     draw.innerHTML = "Too bad, nobody is a winner here!";
-    element.appendChild(draw);
+    boardContainer.appendChild(draw);
   }
 
   // Function that updates the turn indicator
@@ -73,21 +75,21 @@ const gameAdmin = (() => {
           }
         }
       }, {once: true});
-      element.appendChild(cell);
+      boardContainer.appendChild(cell);
       cell.appendChild(pTag);
       updateIndicator();
     }
   };
   const updateState = () => {
     for (let i = 1; i <= 9; i++) {
-      // For numbers 1-9 get the element, add a p tag and update it with the character
+      // For numbers 1-9 get the cell, update it with the character
       // stored in the gameState array that matches the id
-      var element = document.getElementById(i).firstChild;
+      var cell = document.getElementById(i).firstChild;
       // Display icons for the array symbols
       if (gameState[i - 1] == "x") {
-        element.innerHTML = "X";
+        cell.innerHTML = "X";
       } else if (gameState[i - 1] == "o") {
-        element.innerHTML = "O";
+        cell.innerHTML = "O";
       }
     }
 
@@ -145,6 +147,3 @@ const gameAdmin = (() => {
     updateIndicator,
   };
 })();
-
-//gameAdmin.createBoard();
-//newGame.updateState();
